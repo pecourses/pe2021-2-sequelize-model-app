@@ -1,0 +1,6 @@
+### check get existing user tasks - 200
+GET http://localhost:5000/api/users/4/tasks HTTP/1.1
+
+
+### check get don`t existing user tasks - 404
+GET http://localhost:5000/api/users/1000/tasks HTTP/1.1

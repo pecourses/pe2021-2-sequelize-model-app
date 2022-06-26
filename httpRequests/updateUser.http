@@ -1,0 +1,23 @@
+### check updating user with valid info - 200
+PATCH  http://localhost:5000/api/users/6 HTTP/1.1
+Content-Type: application/vnd.api+json
+
+{
+  "lastName": "Anothersurname"
+}
+
+### check updating user with invalid info - 422
+PATCH  http://localhost:5000/api/users/4 HTTP/1.1
+Content-Type: application/vnd.api+json
+
+{
+  "lastName": "AnotherSurname"
+}
+
+### check updating not existing user - 404
+PATCH  http://localhost:5000/api/users/1000 HTTP/1.1
+Content-Type: application/vnd.api+json
+
+{
+  "lastName": "Anothersurname"
+}

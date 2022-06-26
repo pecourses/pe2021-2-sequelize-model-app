@@ -1,0 +1,51 @@
+### check valid user data - 200
+PUT http://localhost:5000/api/users/4 HTTP/1.1
+Content-Type: application/vnd.api+json
+
+{
+  "firstName": "Test",
+  "lastName": "Testovna",
+  "email": "test0@test.test",
+  "passwordHash": "123456",
+  "birthday": "2020-01-01",
+  "gender": "male"
+}
+
+### check invalid user data - 422
+PUT http://localhost:5000/api/users/4 HTTP/1.1
+Content-Type: application/vnd.api+json
+
+{
+  "firstName": "Test0",
+  "lastName": "Testovich0",
+  "email": "test0@test.test",
+  "passwordHash": "123456",
+  "birthday": "2020-01-01",
+  "gender": "male"
+}
+
+### check valid user data (not exist) - 201
+PUT http://localhost:5000/api/users/100 HTTP/1.1
+Content-Type: application/vnd.api+json
+
+{
+  "firstName": "Test",
+  "lastName": "Testovna",
+  "email": "test100@test.test",
+  "passwordHash": "123456",
+  "birthday": "2020-01-01",
+  "gender": "male"
+}
+
+### check invalid user dat  (not exist) - 422
+PUT http://localhost:5000/api/users/100 HTTP/1.1
+Content-Type: application/vnd.api+json
+
+{
+  "firstName": "Test0",
+  "lastName": "Testovna0",
+  "email": "test100@test.test",
+  "passwordHash": "123456",
+  "birthday": "2020-01-01",
+  "gender": "male"
+}
