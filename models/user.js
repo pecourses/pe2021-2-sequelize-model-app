@@ -5,7 +5,13 @@ const { USER_GENDER_LIST } = require('../constants');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    static associate (models) {}
+    static associate (models) {
+      User.hasMany(models.Task, {
+        foreignKey: { name: 'userId', allowNull: false },
+        onDelete: 'RESTRICT',
+        onUpdate: 'CASCADE',
+      });
+    }
   }
   User.init(
     {
