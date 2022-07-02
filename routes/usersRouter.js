@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { usersController } = require('../controllers');
-const { validate } = require('../middleware');
+const { validate, uploads } = require('../middleware');
 
 const usersRouter = Router();
 
@@ -20,5 +20,12 @@ usersRouter
 
 // /api/users/10/tasks
 usersRouter.get('/:userId/tasks', usersController.getUserTasks);
+
+// /api/users/1/images
+usersRouter.patch(
+  '/:userId/images',
+  uploads.uploadUserImage.single('userPhoto'),
+  usersController.updateUserImage
+);
 
 module.exports = usersRouter;

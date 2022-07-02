@@ -59,6 +59,9 @@ module.exports = (sequelize, DataTypes) => {
           isIn: [USER_GENDER_LIST],
         },
       },
+      image: {
+        type: DataTypes.STRING,
+      },
     },
     {
       sequelize,

@@ -169,3 +169,31 @@ module.exports.getUserTasks = async (req, res, next) => {
     next(err);
   }
 };
+
+module.exports.updateUserImage = async (req, res, next) => {
+  const {
+    params: { userId },
+    file,
+  } = req;
+
+  try {
+    const [updatedUserCount, [updatedUser]] = await User.update(
+      { image: file.filename },
+      { where: { id: userId }, returning: true, raw: true }
+    );
+
+    if (!updatedUser) {
+      return next(createError(404, 'User Not Found'));
+    }
+
+    const preparedUser = _.omit(updatedUser, [
+      'passwordHash',
+      'createdAt',
+      'updatedAt',
+    ]);
+
+    res.status(200).send({ data: preparedUser });
+  } catch (err) {
+    next(err);
+  }
+};
