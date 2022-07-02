@@ -3,6 +3,8 @@ const {
   Sequelize: { BaseError, ValidationError },
 } = require('./../models');
 
+// прописать yupValidationErrorHandler
+
 module.exports.dbErrorHandler = (err, req, res, next) => {
   if (err instanceof ValidationError) {
     const errors = err.errors.map(e => ({ status: 422, title: e.message }));

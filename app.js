@@ -1,4 +1,5 @@
 const express = require('express');
+const { errorHandlers } = require('./middleware');
 const router = require('./router');
 
 const app = express();
@@ -11,20 +12,6 @@ app.use(
 
 app.use('/api', router);
 
-app.use((err, req, res, next) => {
-  if (res.headersSent) {
-    return;
-  }
-  console.log('err', err);
-  const errorStatus = err?.status ?? 500;
-  res.status(errorStatus).send({
-    errors: [
-      {
-        status: errorStatus,
-        title: err?.message ?? 'Internal Server Error',
-      },
-    ],
-  });
-});
+app.use(errorHandlers.dbErrorHandler, errorHandlers.errorHandler);
 
 module.exports = app;

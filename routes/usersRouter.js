@@ -1,12 +1,13 @@
 const { Router } = require('express');
 const { usersController } = require('../controllers');
+const { validate } = require('../middleware');
 
 const usersRouter = Router();
 
 // /api/users/
 usersRouter
   .route('/')
-  .post(usersController.createUser)
+  .post(validate.newUserValidation, usersController.createUser)
   .get(usersController.getUsers);
 
 // /api/users/10
