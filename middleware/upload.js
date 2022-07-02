@@ -1,3 +1,4 @@
+const createError = require('http-errors');
 const multer = require('multer');
 const path = require('path');
 const { STATIC_PATH } = require('../constants');
@@ -19,7 +20,10 @@ function fileFilter (req, file, cb) {
   if (FILE_MIMETYPE_REGEXP.test(file.mimetype)) {
     return cb(null, true);
   }
-  cb(null, false);
+  cb(createError(415, 'Support only jpeg/png/gif mimetypes'));
 }
 
-module.exports.uploadUserImage = multer({ storage, fileFilter });
+module.exports.uploadUserImage = multer({
+  storage,
+  fileFilter,
+}).single('userPhoto');

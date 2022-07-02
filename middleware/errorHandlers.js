@@ -1,10 +1,17 @@
 const createError = require('http-errors');
+const multer = require('multer');
 const { ValidationError } = require('yup');
 const {
   Sequelize: { BaseError, ValidationError: ModelValidationError },
 } = require('./../models');
 
-// прописать yupValidationErrorHandler
+module.exports.multerErrorHandler = (err, req, res, next) => {
+  if (err instanceof multer.MulterError) {
+    return next(createError(500, 'Multer Error'));
+  }
+  next(err);
+};
+
 module.exports.validationErrorHandler = (err, req, res, next) => {
   if (err instanceof ValidationError) {
     return res.status(422).send({

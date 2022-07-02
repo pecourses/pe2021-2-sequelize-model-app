@@ -24,7 +24,7 @@ usersRouter.get('/:userId/tasks', usersController.getUserTasks);
 // /api/users/1/images
 usersRouter.patch(
   '/:userId/images',
-  uploads.uploadUserImage.single('userPhoto'),
+  uploads.uploadUserImage,
   usersController.updateUserImage
 );
 
