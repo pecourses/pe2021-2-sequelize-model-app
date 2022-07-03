@@ -17,6 +17,7 @@ app.use(
 app.use('/api', router);
 
 app.use(
+  errorHandlers.multerErrorHandler,
   errorHandlers.validationErrorHandler,
   errorHandlers.dbErrorHandler,
   errorHandlers.errorHandler
